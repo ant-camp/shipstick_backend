@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :product do
-    name { "MyString" }
-    type { "" }
-    length { 1 }
-    width { 1 }
-    height { 1 }
-    weight { 1 }
+    name { "Big Ski Bag" }
+    type { "Ski" }
+    length { 10}
+    width { 15 }
+    height { 15 }
+    weight { 20 }
   end
 end
