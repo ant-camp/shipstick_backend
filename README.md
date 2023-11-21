@@ -1,24 +1,21 @@
-# README
+# ShipSticks Coding Challenge - Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Getting Started
 
-Things you may want to cover:
+* Using ruby 2.7.3
+* Using Rails 6.1.4
 
-* Ruby version
+* `bundle install`
+* `rails s -p 3001` - `localhost:3001`
 
-* System dependencies
+# Populate DB
+* To populate our DB from `product.json` - `bundle exec rake products:populate `
 
-* Configuration
+# Running Tests
+* To run all tests - `bundle exec rspec` or `rspec`
 
-* Database creation
+# Postman sample API requests
+* postman - https://easyupload.io/02c49a
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Additional info
+* Please check the `mongoid.yaml` and configure it to your env. - Due to my personal machine being out of memory i couldn't download Mongodb locally so i used - MongoDB Atlas & MongoDB Compass to get my DB running locally - so running specs and validations were spotty 
