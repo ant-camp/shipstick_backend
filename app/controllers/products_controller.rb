@@ -48,12 +48,12 @@ class ProductsController < ApplicationController
 
   private
 
-    def select_product(params)
-      length = params[:length].to_i
-      width = params[:width].to_i
-      height = params[:height].to_i
-      weight = params[:weight].to_i
-  
+    def select_product(dimension_params)
+      length = dimension_params[:length].to_i
+      width = dimension_params[:width].to_i
+      height = dimension_params[:height].to_i
+      weight = dimension_params[:weight].to_i
+
       @product = Product.find_best_match(length, width, height, weight)
     end
 
