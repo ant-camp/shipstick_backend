@@ -10,9 +10,9 @@ class Product
   field :weight, type: Integer
 
   # Validations
-  validates_presence_of :name, :type, :length, :width, :height, :weight
+  validates :type, :length, :width, :height, :weight, presence: true, allow_blank: false
+  validates :name, uniqueness: true, presence: true, allow_blank: false
   validates_numericality_of :length, :width, :height, :weight, greater_than: 0
-  validates_uniqueness_of :name
 
  # Find the next closest matching product
   def self.find_best_match(length, width, height, weight)
@@ -36,9 +36,14 @@ class Product
       weight_diff = (product.weight - weight).abs
       [-score, size_diff, weight_diff]
     end
-
+    
     # Select the product with the best score
-    best_product, _score = sorted_products.first
-    best_product
+    best_product, best_score = sorted_products.first
+    
+    if best_score > 3
+      best_product
+    else
+      nil
+    end
   end
 end

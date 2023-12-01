@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
   describe 'validations' do
-    
+    it { should_not allow_value("").for(:name) }
+    it { should_not allow_value("").for(:type) }
+    it { should_not allow_value("").for(:length) }
+    it { should_not allow_value("").for(:width) }
+    it { should_not allow_value("").for(:height) }
+    it { should_not allow_value("").for(:weight) }
+
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:type) }
     it { should validate_presence_of(:length) }
@@ -10,7 +16,7 @@ RSpec.describe Product, type: :model do
     it { should validate_presence_of(:height) }
     it { should validate_presence_of(:weight) }
 
-    it { should validate_numericality_of(:length) }
+    it { should validate_numericality_of(:length).is_greater_than(0) }
     it { should validate_numericality_of(:width).is_greater_than(0) }
     it { should validate_numericality_of(:height).is_greater_than(0) }
     it { should validate_numericality_of(:weight).is_greater_than(0) }
@@ -29,9 +35,9 @@ RSpec.describe Product, type: :model do
         expect(best_match).to eq(product2) # Assuming product2 is the best match
       end
 
-      it 'returns the closest match' do
-        closest_match = Product.find_best_match(25, 25, 25, 20)
-        expect(closest_match).to eq(product3) # Assuming product3 is the best match
+      it 'returns nil' do
+        closest_match = Product.find_best_match(99, 99, 99, 99)
+        expect(closest_match).to eq(nil)
       end
     end
   end

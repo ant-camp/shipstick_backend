@@ -29,9 +29,9 @@ RSpec.describe 'Products API', type: :request do
 
   # GET /products/find_by_dimensions
   describe 'GET /products/find_by_dimensions' do
-    before { get '/products/find_by_dimensions', params: { length: 10, width: 10, height: 10, weight: 5 } }
-
     context 'when the product exists' do
+      before { get '/products/find_by_dimensions', params: { length: 10, width: 10, height: 10, weight: 5 } }
+
       it 'returns the product' do
         expect(response_json).not_to be_empty
         expect(response_json['name']).to eq(products.first.name)
@@ -40,6 +40,19 @@ RSpec.describe 'Products API', type: :request do
 
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the product does not exist' do
+      before { get '/products/find_by_dimensions', params: { length: 99, width: 99, height: 99, weight: 99 } }
+
+      it 'returns an error message' do
+        expect(response_json).not_to be_empty
+        expect(response_json['error']).to eq('No products fit that sizing')
+      end
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
       end
     end
   end
